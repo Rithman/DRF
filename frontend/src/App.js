@@ -10,8 +10,7 @@ class App extends React.Component {
 
     this.state = {
       'authors': [],
-      'users': [
-      ],
+      'users': [],
     }
 
   }
@@ -60,3 +59,19 @@ class App extends React.Component {
 }
 
 export default App;
+export const Footer = class Footer extends (React.Component) {
+  render() {
+    return <div>Funky footer</div>;
+  }
+};
+export const Menu = class Menu extends (React.Component) {
+  render() {
+    return <ul>
+      <li><a href="">Пункт меню 1</a></li>
+      <li><a href="">Пункт меню 2</a></li>
+      <li><a href="">Пункт меню 3</a></li>
+    </ul>
+
+  }
+};
+
