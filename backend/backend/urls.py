@@ -8,4 +8,7 @@ router = DefaultRouter()
 router.register("authors", AuthorModelViewSet)
 router.register("users", CustomUserModelViewSet)
 
-urlpatterns = [path("admin/", admin.site.urls), path("api/", include(router.urls))]
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+]
