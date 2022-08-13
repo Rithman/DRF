@@ -19,7 +19,7 @@ class App extends React.Component {
     (axios
       .get("http://127.0.0.1:8000/api/authors")
       .then(response => {
-        const authors = response.data
+        const authors = response.data.results
         this.setState(
           {
             'authors': authors
@@ -32,7 +32,7 @@ class App extends React.Component {
       (axios
         .get("http://127.0.0.1:8000/api/users")
         .then(response => {
-          const users = response.data
+          const users = response.data.results
           this.setState(
             {
               'users': users
