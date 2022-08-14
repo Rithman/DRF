@@ -25,7 +25,6 @@ class TODOModelViewSet(ModelViewSet):
     pagination_class = TODOLimitOffsetPagination
     serializer_class = TODOSerializer
     queryset = TODO.objects.all()
-    filteset_fields = ["Project"]
     filterset_class = TODOFilter
 
     def perform_destroy(self, instance):
