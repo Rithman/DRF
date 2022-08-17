@@ -12,6 +12,9 @@ const TodoItem = ({ todo }) => {
             <td>
                 {todo.text}
             </td>
+            <td>
+                {todo.is_active}
+            </td>
         </tr>
     )
 }
@@ -27,6 +30,9 @@ const TodoList = ({ todos }) => {
             </th>
             <th>
                 Text
+            </th>
+            <th>
+                Is active
             </th>
             {todos.map((todo) => <TodoItem todo={todo} />)}
         </table>
