@@ -18,4 +18,3 @@ class TODOFilter(filters.FilterSet):
     class Meta:
         model = TODO
         fields = ["start_date", "end_date", "project__id"]
-

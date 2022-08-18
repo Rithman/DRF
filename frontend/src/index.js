@@ -4,6 +4,6 @@ import App, { Footer, Menu } from './App';
 import './index.css';
 
 ReactDOM.render(
-  [<Menu />, <App />, <Footer />],
+  [<App />],
   document.getElementById('root')
 );
