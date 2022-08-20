@@ -1,0 +1,84 @@
+[
+    {
+        "model": "authapp.customuser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$QOoJWtu9nNs8N690W0MpCa$LGFXcSP4eoNRyew2otYqm4zWTbV2WUITF3ZQTPZueP0=",
+            "last_login": "2022-08-20T10:45:36.614Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "admin",
+            "last_name": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-08-20T10:32:36Z",
+            "email": "admin@mail.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authapp.customuser",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$QOoJWtu9nNs8N690W0MpCa$LGFXcSP4eoNRyew2otYqm4zWTbV2WUITF3ZQTPZueP0=",
+            "is_superuser": false,
+            "username": "user01",
+            "first_name": "user01",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "email": "user01@mail.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authapp.customuser",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$QOoJWtu9nNs8N690W0MpCa$LGFXcSP4eoNRyew2otYqm4zWTbV2WUITF3ZQTPZueP0=",
+            "is_superuser": false,
+            "username": "user02",
+            "first_name": "user02",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "email": "user02@mail.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authapp.customuser",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$QOoJWtu9nNs8N690W0MpCa$LGFXcSP4eoNRyew2otYqm4zWTbV2WUITF3ZQTPZueP0=",
+            "is_superuser": false,
+            "username": "user03",
+            "first_name": "user03",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "email": "user03@mail.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "authapp.customuser",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$QOoJWtu9nNs8N690W0MpCa$LGFXcSP4eoNRyew2otYqm4zWTbV2WUITF3ZQTPZueP0=",
+            "is_superuser": false,
+            "username": "user04",
+            "first_name": "user04",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "email": "user04@mail.ru",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

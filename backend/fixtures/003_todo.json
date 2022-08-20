@@ -1,0 +1,62 @@
+[
+    {
+        "model": "todoapp.todo",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "project": 1,
+            "text": "This we must do!",
+            "is_active": true,
+            "created_at": "2022-08-20T11:40:48.818586Z",
+            "updated_at": "2022-08-20T11:40:48.818607Z"
+        }
+    },
+    {
+        "model": "todoapp.todo",
+        "pk": 2,
+        "fields": {
+            "user": 3,
+            "project": 2,
+            "text": "Again some text",
+            "is_active": true,
+            "created_at": "2022-08-20T11:40:48.818586Z",
+            "updated_at": "2022-08-20T11:40:48.818607Z"
+        }
+    },
+    {
+        "model": "todoapp.todo",
+        "pk": 3,
+        "fields": {
+            "user": 4,
+            "project": 3,
+            "text": "003 Again some text",
+            "is_active": true,
+            "created_at": "2022-08-20T11:40:48.818586Z",
+            "updated_at": "2022-08-20T11:40:48.818607Z"
+        }
+    },
+    {
+        "model": "todoapp.todo",
+        "pk": 4,
+        "fields": {
+            "user": 5,
+            "project": 4,
+            "text": "004 Again some text",
+            "is_active": true,
+            "created_at": "2022-08-20T11:40:48.818586Z",
+            "updated_at": "2022-08-20T11:40:48.818607Z"
+        }
+    },
+    {
+        "model": "todoapp.todo",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "project": 2,
+            "text": "00 5Again some text",
+            "is_active": true,
+            "created_at": "2022-08-20T11:40:48.818586Z",
+            "updated_at": "2022-08-20T11:40:48.818607Z"
+        }
+    }
+]

@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins
 from rest_framework.decorators import action
+from rest_framework.permissions import DjangoModelPermissions
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
@@ -9,6 +10,7 @@ from .serializers import CustomUserModelSerializer
 
 
 class CustomUserModelViewSet(ModelViewSet):
+    permission_classes = [DjangoModelPermissions]
     serializer_class = CustomUserModelSerializer
     queryset = CustomUser.objects.all()
 
