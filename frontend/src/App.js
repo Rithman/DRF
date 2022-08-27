@@ -6,7 +6,6 @@ import TodoList from "./components/TodoList";
 import LoginForm from './components/Auth';
 import axios from 'axios';
 import { BrowserRouter, Route, Routes, Link, Navigate, useLocation } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 
 
 const NotFound = () => {
@@ -27,18 +26,18 @@ class App extends React.Component {
       'projects': [],
       'users': [],
       'todos': [],
-      'token': ''
+      'token': '',
+      'current_user': ''
     }
   }
 
   set_token(token) {
-    const cookies = new Cookies()
-    cookies.set('token', token)
-    this.setState({ 'token': token }, () => this.load_data())
+    localStorage.setItem("token", token)
+    this.setState({ "token": token }, () => this.load_data())
   }
 
   is_authenticated() {
-    return this.state.token !== ''
+    return !!this.state.token
   }
 
   logout() {
@@ -46,18 +45,18 @@ class App extends React.Component {
   }
 
   get_token_from_storage() {
-    const cookies = new Cookies()
-    const token = cookies.get('token')
+    let token = localStorage.getItem("token")
     this.setState({ 'token': token }, () => this.load_data())
   }
 
   get_token(username, password) {
-    axios.post('http://127.0.0.1:8000/api-auth-token/', {
+    axios.post('http://127.0.0.1:8000/api-token-auth/', {
       username: username,
       password: password
     })
       .then(response => {
         this.set_token(response.data['token'])
+        this.get_current_user()
       }).catch(error => alert('Неверный логин или пароль'))
   }
 
@@ -105,24 +104,43 @@ class App extends React.Component {
       })
   }
 
+  get_current_user() {
+    let headers = this.get_headers()
+    axios.get("http://127.0.0.1:8000/api-current-user/", { headers })
+      .then(response => {
+        this.setState({ 'current_user': response.data['username'] })
+      })
+  }
 
+  show_current_user() {
+    if (this.is_authenticated()) {
+      if (this.state.current_user == "") {
+        this.get_current_user();
+      }
+      return `Вы авторизованы как: ${this.state.current_user}`;
+    } else {
+      return `Вы не авторизованы`
+    }
+  }
 
   componentDidMount() {
     this.get_token_from_storage()
-
   }
+
 
   render() {
     return (
 
       <div>
+        <div>
+          {this.show_current_user()}
+        </div>
         <BrowserRouter>
           <nav>
             <ul>
               <li> <Link to="/users">Users</Link> </li>
               <li> <Link to="/projects">Projects</Link></li>
               <li> <Link to="/todos">Todos</Link> </li>
-              {/* <li> <Link to="/login">Login</Link></li> */}
               <li>
                 {this.is_authenticated() ? <button onClick={() => this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
               </li>
@@ -142,7 +160,7 @@ class App extends React.Component {
           </Routes>
         </BrowserRouter>
         <Footer />
-      </div>
+      </div >
     )
   }
 }
@@ -155,4 +173,3 @@ const Footer = class Footer extends (React.Component) {
 
 
 export default App;
-
