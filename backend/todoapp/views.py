@@ -17,7 +17,7 @@ class TODOLimitOffsetPagination(LimitOffsetPagination):
 
 class ProjectModelViewSet(ModelViewSet):
     # pagination_class = ProjectLimitOffsetPagination
-    permission_classes = [DjangoModelPermissions]
+    # permission_classes = [DjangoModelPermissions]
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
     filterset_class = ProjectFilter
