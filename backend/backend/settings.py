@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_filters",
     "corsheaders",
     "rest_framework.authtoken",
+    "drf_yasg",
     "authapp",
     "todoapp",
 ]
@@ -141,6 +142,7 @@ AUTH_USER_MODEL = "authapp.CustomUser"
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.QueryParameterVersioning",
     # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     # "PAGE_SIZE": 100,
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
