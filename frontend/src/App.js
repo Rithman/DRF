@@ -114,7 +114,7 @@ class App extends React.Component {
 
   show_current_user() {
     if (this.is_authenticated()) {
-      if (this.state.current_user == "") {
+      if (this.state.current_user === "") {
         this.get_current_user();
       }
       return `Вы авторизованы как: ${this.state.current_user}`;
