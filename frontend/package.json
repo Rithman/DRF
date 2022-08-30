@@ -8,7 +8,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
+<<<<<<< HEAD
     "react-scripts": "0.9.5"
+=======
+    "react-scripts": "0.9.5",
+    "universal-cookie": "^4.0.4"
+>>>>>>> 4197a5748a75ea9e51ea4fa3801f284df1b46930
   },
   "scripts": {
     "start": "react-scripts start",

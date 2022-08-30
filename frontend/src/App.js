@@ -25,70 +25,126 @@ class App extends React.Component {
     this.state = {
       'projects': [],
       'users': [],
-      'todos': []
+      'todos': [],
+      'token': '',
+      'current_user': ''
     }
   }
 
-  load_data() {
-    axios
-      .get("http://127.0.0.1:8000/api/projects")
-      .then(response => {
-        const projects = response.data
-        this.setState(
-          {
-            'projects': projects
-          }
-        )
-      })
-      .catch(error => console.log(error))
+  set_token(token) {
+    localStorage.setItem("token", token)
+    this.setState({ "token": token }, () => this.load_data())
+  }
 
-    axios
-      .get("http://127.0.0.1:8000/api/users")
-      .then(response => {
-        const users = response.data
-        this.setState(
-          {
-            'users': users
-          }
-        )
-      })
-      .catch(error => console.log(error))
+  is_authenticated() {
+    return !!this.state.token
+  }
 
-    axios
-      .get("http://127.0.0.1:8000/api/todos")
-      .then(response => {
-        const todos = response.data
-        this.setState(
-          {
-            'todos': todos
-          }
-        )
-      })
-      .catch(error => console.log(error))
+  logout() {
+    this.set_token('')
+  }
+
+  get_token_from_storage() {
+    let token = localStorage.getItem("token")
+    this.setState({ 'token': token }, () => this.load_data())
   }
 
   get_token(username, password) {
-    axios.post("http://127.0.0.1:8000/api-auth-token/", { username: username, password: password })
+    axios.post('http://127.0.0.1:8000/api-token-auth/', {
+      username: username,
+      password: password
+    })
       .then(response => {
-        console.log(response.data)
-      }).catch(error => alert("Неверный логин или пароль"))
+        this.set_token(response.data['token'])
+        this.get_current_user()
+      }).catch(error => alert('Неверный логин или пароль'))
   }
 
+
+  get_headers() {
+    let headers = {
+      'Content-Type': 'application/json'
+    }
+    if (this.is_authenticated()) {
+      headers['Authorization'] = 'Token ' + this.state.token
+    }
+    return headers
+  }
+
+
+  load_data() {
+    const headers = this.get_headers()
+    axios.get("http://127.0.0.1:8000/api/projects", { headers })
+      .then(response => {
+        this.setState({ projects: response.data })
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({ projects: [] })
+      })
+
+    axios
+      .get("http://127.0.0.1:8000/api/users", { headers })
+      .then(response => {
+        this.setState({ users: response.data })
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({ users: [] })
+      })
+
+    axios
+      .get("http://127.0.0.1:8000/api/todos", { headers })
+      .then(response => {
+        this.setState({ todos: response.data })
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({ todos: [] })
+      })
+  }
+
+  get_current_user() {
+    let headers = this.get_headers()
+    axios.get("http://127.0.0.1:8000/api-current-user/", { headers })
+      .then(response => {
+        this.setState({ 'current_user': response.data['username'] })
+      })
+  }
+
+  show_current_user() {
+    if (this.is_authenticated()) {
+      if (this.state.current_user === "") {
+        this.get_current_user();
+      }
+      return `Вы авторизованы как: ${this.state.current_user}`;
+    } else {
+      return `Вы не авторизованы`
+    }
+  }
 
   componentDidMount() {
-    this.load_data()
+    this.get_token_from_storage()
   }
+
 
   render() {
     return (
 
       <div>
+        <div>
+          {this.show_current_user()}
+        </div>
         <BrowserRouter>
           <nav>
-            <li> <Link to="/users">Users</Link> </li>
-            <li> <Link to="/projects">Projects</Link></li>
-            <li> <Link to="/todos">Todos</Link> </li>
-            <li> <Link to="/login">Login</Link></li>
+            <ul>
+              <li> <Link to="/users">Users</Link> </li>
+              <li> <Link to="/projects">Projects</Link></li>
+              <li> <Link to="/todos">Todos</Link> </li>
+              <li>
+                {this.is_authenticated() ? <button onClick={() => this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
+              </li>
+            </ul>
           </nav>
           <Routes>
             <Route path="/users">
@@ -104,7 +160,7 @@ class App extends React.Component {
           </Routes>
         </BrowserRouter>
         <Footer />
-      </div>
+      </div >
     )
   }
 }
@@ -117,4 +173,3 @@ const Footer = class Footer extends (React.Component) {
 
 
 export default App;
-
