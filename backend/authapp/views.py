@@ -7,13 +7,18 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from .models import CustomUser
-from .serializers import CustomUserModelSerializer
+from .serializers import CustomUserModelSerializer, CustomUserModelSerializerIsStuff
 
 
 class CustomUserModelViewSet(ModelViewSet):
     permission_classes = [DjangoModelPermissions]
     serializer_class = CustomUserModelSerializer
     queryset = CustomUser.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.version == "0.2":
+            return CustomUserModelSerializerIsStuff
+        return CustomUserModelSerializer
 
 
 class CustomUserModelLimitedViewSet(
@@ -30,7 +35,7 @@ class CustomUserModelLimitedViewSet(
         return Response({"name": str(user.first_name)})
 
 
-class CurrentCustomUserView(APIView):
+class CurrentCustomUserView(APIView):  # for getting current user
     def get(self, request):
         serializer = CustomUserModelSerializer(request.user)
         return Response(serializer.data)
