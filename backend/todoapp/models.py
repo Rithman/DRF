@@ -9,8 +9,8 @@ class Project(models.Model):
 
 
 class TODO(models.Model):
-    user = models.ForeignKey(CustomUser, models.PROTECT)
-    project = models.ForeignKey(Project, models.PROTECT)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     text = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
