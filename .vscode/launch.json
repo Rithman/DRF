@@ -11,6 +11,7 @@
             "program": "${workspaceFolder}/backend/manage.py",
             "args": [
                 "runserver",
+                "--settings=backend.settings.debug",
                 "0.0.0.0:8000"
             ],
             "django": true,
